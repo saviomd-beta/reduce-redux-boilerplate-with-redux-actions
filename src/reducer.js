@@ -53,6 +53,9 @@ export const fetchTodos = () => {
     getTodos().then(todos => {
       dispatch(loadTodos(todos))
       dispatch(hideLoader())
+    }).catch(err => {
+      dispatch(loadTodos(err))
+      dispatch(hideLoader())
     })
   }
 }
@@ -109,8 +112,13 @@ export default handleActions({
       todos: state.todos.concat(action.payload)
     }
   },
-  LOAD_TODOS: (state, action) => {
-    return { ...state, todos: action.payload }
+  LOAD_TODOS: {
+    next: (state, action) => {
+      return { ...state, todos: action.payload }
+    },
+    throw: (state, action) => {
+      return { ...state, message: 'There was a problem loading todos' }
+    }
   },
   UPDATE_CURRENT: (state, action) => {
     return { ...state, currentTodo: action.payload }
