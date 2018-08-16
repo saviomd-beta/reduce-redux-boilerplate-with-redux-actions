@@ -24,6 +24,11 @@
       "name": "Handle errors",
       "isComplete": false,
       "id": 5
+    },
+    {
+      "name": "New todo",
+      "isComplete": false,
+      "id": 6
     }
   ]
 }
